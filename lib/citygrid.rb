@@ -31,7 +31,7 @@ module Citygrid
   end
 
   class << self
-    attr_accessor :api_key
+    attr_accessor :publisher
   end
   
 end

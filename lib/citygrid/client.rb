@@ -5,18 +5,18 @@ module Citygrid
     base_uri "http://api.citygridmedia.com/content"
     format :xml
     
-    attr_reader :api_key
+    attr_reader :publisher
                 
     def initialize(options={})
-      @api_key = options[:api_key] || Citygrid.api_key
+      @publisher = options[:publisher] || Citygrid.publisher
     end
 
     def search_locations(options={})
-      mashup(self.class.get("/search/where", :query => options.merge(self.default_options)))
+      mashup(self.class.get("/places/v2/search/where", :query => options.merge(self.default_options)))
     end
 
     def detail(options={})
-      mashup(self.class.get("/detail", :query => options.merge(self.default_options)))
+      mashup(self.class.get("/places/v2/detail", :query => options.merge(self.default_options)))
     end
     
     # def search_events(options={})
@@ -38,7 +38,7 @@ module Citygrid
     protected
     
     def default_options
-      {:api_key => @api_key, :publisher => "acme"}
+      {:publisher => @publisher}
     end
     
     def mashup(response)

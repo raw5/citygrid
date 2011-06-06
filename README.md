@@ -19,24 +19,21 @@ As a gem:
 
     sudo gem install citygrid
 
-As a plugin (in your Rails directory:
-
-    script/plugin install git://github.com/phuphighter/citygrid.git
     
-## Get a Citygrid API key
+## Get a Publisher Code
 
-Sign up for a CityGrid API key: [http://developer.citysearch.com/member/register](http://developer.citysearch.com/member/register)
+Sign up for a CityGrid Publisher: [http://developer.citygridmedia.com/dashboard/registration](http://developer.citygridmedia.com/dashboard/registration)
     
 ## Usage
 
 ### Instantiate a client
 
-    >> citygrid = Citygrid::Client.new(:api_key => 'your_api_key')
+    >> citygrid = Citygrid::Client.new(:publisher => 'your_publisher_code')
     
 ### or configure once
 
     >> Citygrid.configure do |config|
-    >>   config.api_key = 'your_api_key'
+    >>   config.publisher = 'publisher'
     >> end
     >> citygrid = Citygrid::Client.new
     
@@ -46,9 +43,9 @@ Sign up for a CityGrid API key: [http://developer.citysearch.com/member/register
     >> spot.results.location.name
     => "Roots Coffeehouse"
     
-    >> profile = citygrid.profile(:listing_id => '613027480', :client_ip => 'any_client_ip')
-    >> profile.locations.location.categories
-    => <#Hashie::Mash category=<#Hashie::Mash name="Coffeehouses" nameid="1726" parent="Restaurants" parentid="1722">>
+    >> spot = citygrid.reviews(:what => "roots coffee", :where => "76180", :rpp => 1)
+    >> spot.results.reviews.first.review
+
     
 You can search for locations and events, get reviews, and get business profiles.
 
