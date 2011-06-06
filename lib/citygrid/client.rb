@@ -2,7 +2,7 @@ module Citygrid
   
   class Client
     include HTTParty
-    base_uri "http://api.citygridmedia.com/content/places/v2"
+    base_uri "http://api.citygridmedia.com/content"
     format :xml
     
     attr_reader :api_key
@@ -31,9 +31,9 @@ module Citygrid
     #   end
     # end
     
-    # def reviews(options={})
-    #   mashup(self.class.get("/reviews/", :query => options.merge(self.default_options)))
-    # end
+     def reviews(options={})
+       mashup(self.class.get("/reviews/v2/search/where", :query => options.merge(self.default_options)))
+     end
     
     protected
     
